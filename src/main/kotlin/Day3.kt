@@ -20,7 +20,7 @@ class Day3 : Aoc() {
                                         break
                                     }
                                 }
-                                for (m in i + k + 1..input.first().length - 1) {
+                                for (m in i + k + 1..<input.first().length) {
                                     val right = input[j + l][m]
                                     if (right.isDigit()) {
                                         number = "${number}${right}"
@@ -61,7 +61,7 @@ class Day3 : Aoc() {
                                         break
                                     }
                                 }
-                                for (m in i + k + 1..input.first().length - 1) {
+                                for (m in i + k + 1..<input.first().length) {
                                     val right = input[j + l][m]
                                     if (right.isDigit()) {
                                         number = "${number}${right}"
