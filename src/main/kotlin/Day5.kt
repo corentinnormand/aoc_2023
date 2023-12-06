@@ -122,9 +122,6 @@ class Day5 : Aoc() {
             .chunked(2)
             .map { (it[0]..<it[0] + it[1]) }
 
-        val results = mutableSetOf<Long>()
-        var min = Long.MAX_VALUE
-
         runBlocking {
             coroutineScope {
                 for (i in 19976893..4_294_967_296) {
