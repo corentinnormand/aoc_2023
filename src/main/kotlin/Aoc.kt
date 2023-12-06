@@ -1,8 +1,8 @@
 import java.io.File
 
 abstract class Aoc {
-    fun readFile(fileName: String): List<String> =
-        object {}::class.java.getResource(fileName)!!.readText().trim().lines()
+    fun readFile(fileName: String): String =
+        object {}::class.java.getResource(fileName)!!.readText().trim()
 
     fun main() {
         one()

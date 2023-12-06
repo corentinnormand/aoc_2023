@@ -1,6 +1,6 @@
 class Day3 : Aoc() {
     override fun one() {
-        val input = readFile("day3.txt")
+        val input = readFile("day3.txt").lines()
         val numbers = mutableListOf<Int>()
         for (i in 0..<input[0].length) {
             for (j in input.indices) {
@@ -41,7 +41,7 @@ class Day3 : Aoc() {
     }
 
     override fun two() {
-        val input = readFile("day3.txt")
+        val input = readFile("day3.txt").lines()
         val numbers = mutableListOf<Int>()
         for (i in 0..<input[0].length) {
             for (j in input.indices) {

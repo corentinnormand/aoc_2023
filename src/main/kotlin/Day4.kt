@@ -7,7 +7,7 @@ class Day4 : Aoc() {
             .toSet()
 
     override fun one() {
-        val input = readFile("day4.txt")
+        val input = readFile("day4.txt").lines()
         val result = input.map { it.split(":")[1] }
             .map { it.split("|") }
             .map { Pair(strToSet(it[0]), strToSet(it[1])) }
@@ -21,16 +21,15 @@ class Day4 : Aoc() {
 
     override fun two() {
 
-        val tmp = readFile("day4.txt")
+        val tmp = readFile("day4.txt").lines()
             .filter { it.isNotBlank() }
             .map { it.split(":") }
             .map { Pair(it[0].split(" ").last(), it[1]) }
-            .map { println(it); Pair(it.first.trim().toInt(), it.second.split("|")) }
+            .map { Pair(it.first.trim().toInt(), it.second.split("|")) }
             .map { Pair(it.first, strToSet(it.second[0]).intersect(strToSet(it.second[1])).size) }
             .map { Pair(it.first, (it.first + 1..it.first + it.second).toSet()) }
             .toMap()
-        
-        println(tmp)
+
         var index = 0
 
         val inputs = tmp.values.toMutableList()

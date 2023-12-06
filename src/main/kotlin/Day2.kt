@@ -2,7 +2,7 @@ class Day2 : Aoc() {
 
 
     override fun one() {
-        val input = readFile("day2.txt")
+        val input = readFile("day2.txt").lines()
         val result = input.asSequence().map { it.split(":") }
             .map { s ->
                 val second = s[1].split(';')
@@ -22,7 +22,7 @@ class Day2 : Aoc() {
     }
 
     override fun two() {
-        val input = readFile("day2.txt")
+        val input = readFile("day2.txt").lines()
         val result = input.asSequence().map { it.split(":") }
             .map { s ->
                 val second = s[1].split(';')

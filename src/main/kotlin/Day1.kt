@@ -24,7 +24,7 @@ class Day1 : Aoc() {
     override fun one() {
 
 
-        val message = readFile("day1.txt")
+        val message = readFile("day1.txt").lines()
             .map { s -> Pair(s.first { it.isDigit() }, s.last { it.isDigit() }) }
             .map { p -> "${p.first}${p.second}".toInt() }
             .reduceRight { i: Int, a: Int -> a + i }
@@ -32,7 +32,7 @@ class Day1 : Aoc() {
     }
 
     override fun two() {
-        val message = readFile("day1.txt")
+        val message = readFile("day1.txt").lines()
             .map { s -> Pair(s.findAnyOf(set.keys)!!.second, s.findLastAnyOf(set.keys)!!.second) }
             .map { p -> "${set[p.first]}${set[p.second]}".toInt() }
             .reduceRight { i: Int, a: Int -> a + i }
