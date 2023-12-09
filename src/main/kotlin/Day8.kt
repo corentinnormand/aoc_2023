@@ -65,7 +65,7 @@ class Day8 : Aoc() {
             var steps = 0L
             var tmp = value
             while (tmp.last() != 'Z') {
-                for (d in directions) {
+                for (d in directions) { 
                     val pair = instructions.get(tmp)
                     tmp = if (d == 'L') pair!!.first else pair!!.second
                     steps++
