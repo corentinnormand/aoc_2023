@@ -40,7 +40,7 @@ class Day10 : Aoc() {
         for ((j, _) in input.withIndex()) {
             for ((i, _) in input[j].withIndex()) {
                 if (input[j][i] == 'S') {
-                    return Coords(j, i)
+                    return Coords(i, j)
                 }
             }
         }
