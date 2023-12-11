@@ -1,9 +1,24 @@
+import java.awt.Polygon
+
 fun main() {
-    Day10().one()
+    Day10().two()
 }
 
 class Day10 : Aoc() {
 
+
+//    val test = """
+//        .F----7F7F7F7F-7....
+//        .|F--7||||||||FJ....
+//        .||.FJ||||||||L7....
+//        FJL7L7LJLJ||LJ.L-7..
+//        L--J.L7...LJS7F-7L7.
+//        ....F-J..F7FJ|L7L7L7
+//        ....L7.F7||L7|.L7L7|
+//        .....|FJLJ|FJ|F7|.LJ
+//        ....FJL-7.||.||||...
+//        ....L---J.LJ.LJLJ...
+//    """.trimIndent()
 
     val test = """
         FF7FSF7F7F7F7F7F---7
@@ -16,7 +31,7 @@ class Day10 : Aoc() {
         7-L-JL7||F7|L7F-7F7|
         L.L7LFJ|||||FJL7||LJ
         L7JLJL-JLJLJL--JLJ.L
-    """.trimIndent().lines()
+    """.trimIndent()
 
     val test2 = """
         ...........
@@ -90,17 +105,17 @@ class Day10 : Aoc() {
     override fun one() {
         val input = readFile("day10.txt").lines()
         val startingCoords = findStart(input)
-        val all = mutableListOf<List<Coords>>()
+        val all = mutableListOf<List<Pair<Coords, Char>>>()
         for (coords in listOf(Coords(-1, 0), Coords(0, -1), Coords(1, 0), Coords(0, 1))) {
             var last = startingCoords
             var current = Coords(startingCoords.x + coords.x, startingCoords.y + coords.y)
             val currentChar = get(input = input, current)
-            val allCoords = mutableListOf<Coords>()
+            val allCoords = mutableListOf<Pair<Coords, Char>>()
             while (currentChar != 'S') {
                 val nextTile = nextTile(input = input, last = last, current = current) ?: break
                 last = current
                 current = nextTile
-                allCoords.add(current)
+                allCoords.add(Pair(current, currentChar))
             }
             all.add(allCoords)
         }
@@ -112,45 +127,60 @@ class Day10 : Aoc() {
 
     override fun two() {
         val input = readFile("day10.txt").lines()
+//        val input = test.lines()
         val startingCoords = findStart(input)
-        val all = mutableListOf<List<Coords>>()
+        val all = mutableListOf<List<Pair<Coords, Char>>>()
+
         for (coords in listOf(Coords(-1, 0), Coords(0, -1), Coords(1, 0), Coords(0, 1))) {
             var last = startingCoords
             var current = Coords(startingCoords.x + coords.x, startingCoords.y + coords.y)
             if (current.x > 0 && current.y > 0) {
-                val currentChar = get(input = input, current)
-                val allCoords = mutableListOf<Coords>()
+                var currentChar = get(input = input, current)
+                val allCoords = mutableListOf<Pair<Coords, Char>>()
                 while (currentChar != 'S') {
+                    currentChar = get(input, current)
                     val nextTile = nextTile(input = input, last = last, current = current) ?: break
-                    allCoords.add(current)
+                    allCoords.add(Pair(current, currentChar))
                     last = current
                     current = nextTile
                 }
                 all.add(allCoords)
             }
         }
-
+        println(all.map { it.size })
         val res = all.maxByOrNull { it.size }!!
             .toSet()
 
+        val goodChars = res
+            .map {
+                when (it.second) {
+                    '7' -> Pair(it.first, '┓')
+                    'J' -> Pair(it.first, '┛')
+                    'F' -> Pair(it.first, '┏')
+                    'L' -> Pair(it.first, '┗')
+                    '-' -> Pair(it.first, '━')
+                    '|' -> Pair(it.first, '┃')
+                    else -> it
+                }
+            }
+            .toSet()
+
+        val polygon = Polygon()
+        for (i in res) {
+            polygon.addPoint(i.first.x, i.first.y)
+        }
+
+        println((res.size / 2) + 1)
         var count = 0
         for (y in input.indices) {
             for (x in input[y].indices) {
                 val currentChar = get(input, Coords(x, y))
-                if (currentChar == '.') {
-                    val findxHigh = res.filter { it.x > x && it.y == y }.size
-                    val findxLow = res.filter { it.x < x && it.y == y }.size
-                    val findyHigh = res.filter { it.y > y && it.x == x }.size
-                    val findyLow = res.filter { it.y < y && it.x == x }.size
-                    val cond = (findxHigh % 2 == 0 && findxLow % 2 == 0) ||
-                            (findyHigh % 2 == 0 && findyLow % 2 == 0)
-                    print(
-                        if (cond) 'O' else {
-                            count++; 'I'
-                        }
-                    )
+                val find = goodChars.find { it.first == Coords(x, y) }
+                if (polygon.contains(x, y) && find == null) {
+                    print("I")
+                    count++;
                 } else {
-                    print(currentChar)
+                    print(find?.second ?: "O")
                 }
             }
             println()
