@@ -4,7 +4,7 @@ fun main() {
     Day10().two()
 }
 
-class Day10 : Aoc() {
+class Day10 : Aoc("day10.txt") {
 
 
 //    val test = """
@@ -126,8 +126,8 @@ class Day10 : Aoc() {
     }
 
     override fun two() {
-        val input = readFile("day10.txt").lines()
-//        val input = test.lines()
+//        val input = readFile("day10.txt").lines()
+        val input = test.lines()
         val startingCoords = findStart(input)
         val all = mutableListOf<List<Pair<Coords, Char>>>()
 
@@ -174,7 +174,6 @@ class Day10 : Aoc() {
         var count = 0
         for (y in input.indices) {
             for (x in input[y].indices) {
-                val currentChar = get(input, Coords(x, y))
                 val find = goodChars.find { it.first == Coords(x, y) }
                 if (polygon.contains(x, y) && find == null) {
                     print("I")
@@ -186,5 +185,6 @@ class Day10 : Aoc() {
             println()
         }
         println(count)
+        println(count - res.size)
     }
 }

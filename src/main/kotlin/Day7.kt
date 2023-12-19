@@ -6,7 +6,7 @@ fun main(args: Array<String>) {
     Day7().two()
 }
 
-class Day7 : Aoc() {
+class Day7 : Aoc("day7.txt") {
 
     val test = """
     32T3K 765

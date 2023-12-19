@@ -1,4 +1,4 @@
-class Day2 : Aoc() {
+class Day2 : Aoc("day2.txt") {
 
 
     override fun one() {

@@ -1,4 +1,4 @@
-class Day3 : Aoc() {
+class Day3 : Aoc("day3.txt") {
     override fun one() {
         val input = readFile("day3.txt").lines()
         val numbers = mutableListOf<Int>()

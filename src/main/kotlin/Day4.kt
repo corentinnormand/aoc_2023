@@ -1,4 +1,4 @@
-class Day4 : Aoc() {
+class Day4 : Aoc("day4.txt") {
     private fun strToSet(string: String) =
         string.split(" ")
             .map { it.trim() }

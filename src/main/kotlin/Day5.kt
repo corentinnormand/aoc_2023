@@ -2,7 +2,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class Day5 : Aoc() {
+class Day5 : Aoc("day5.txt") {
     val test = """
             seeds: 79 14 55 13
 

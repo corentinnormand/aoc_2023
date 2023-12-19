@@ -1,4 +1,4 @@
-class Day1 : Aoc() {
+class Day1 : Aoc("day1.txt") {
 
     val set = mapOf<String, Int>(
         "1" to 1,

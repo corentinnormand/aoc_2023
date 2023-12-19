@@ -2,7 +2,7 @@ fun main(args: Array<String>) {
     Day9().two()
 }
 
-class Day9 : Aoc() {
+class Day9 : Aoc("day9.txt") {
 
     val test = """
    10 13 16 21 30 45
